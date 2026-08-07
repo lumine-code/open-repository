@@ -1,12 +1,16 @@
 {
+  // The `alt-g` family, shared with git-panel (alt-g g), github-panel
+  // (alt-g h), git-diff and git-command. These act on the active file rather
+  // than on a panel, so they stay at workspace scope: get-active-path falls
+  // through the tree view, the active tab and the active editor in turn.
   "atom-workspace": {
     "alt-g o": "open-repository:file",
     "alt-g b": "open-repository:blame",
-    "alt-g h": "open-repository:history",
+    "alt-g l": "open-repository:history",
     "alt-g i": "open-repository:issues",
     "alt-g p": "open-repository:pull-requests",
     "alt-g c": "open-repository:copy-url",
-    "alt-g r": "open-repository:branch-compare",
-    "alt-g g": "open-repository:repository"
+    "alt-g m": "open-repository:branch-compare",
+    "alt-g r": "open-repository:repository"
   }
 }

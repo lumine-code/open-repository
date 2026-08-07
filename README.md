@@ -17,7 +17,7 @@ To install `open-repository` search for _open-repository_ in the Install pane of
 
 ## Commands
 
-Commands available in `atom-pane`:
+Commands available in `atom-workspace`:
 
 - `open-repository:file`: open the current file on its host,
 - `open-repository:file-on-master`: open the current file on the `master` branch,

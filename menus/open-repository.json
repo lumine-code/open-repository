@@ -7,28 +7,8 @@
           "label": "Open Repository",
           "submenu": [
             {
-              "label": "Blame",
-              "command": "open-repository:blame"
-            },
-            {
-              "label": "Branch Compare",
-              "command": "open-repository:branch-compare"
-            },
-            {
-              "label": "Copy URL",
-              "command": "open-repository:copy-url"
-            },
-            {
-              "label": "File",
-              "command": "open-repository:file"
-            },
-            {
-              "label": "File on Master",
-              "command": "open-repository:file-on-master"
-            },
-            {
-              "label": "History",
-              "command": "open-repository:history"
+              "label": "Repository",
+              "command": "open-repository:repository"
             },
             {
               "label": "Issues",
@@ -39,8 +19,34 @@
               "command": "open-repository:pull-requests"
             },
             {
-              "label": "Repository",
-              "command": "open-repository:repository"
+              "type": "separator"
+            },
+            {
+              "label": "File",
+              "command": "open-repository:file"
+            },
+            {
+              "label": "File on Master",
+              "command": "open-repository:file-on-master"
+            },
+            {
+              "label": "Blame",
+              "command": "open-repository:blame"
+            },
+            {
+              "label": "History",
+              "command": "open-repository:history"
+            },
+            {
+              "label": "Branch Compare",
+              "command": "open-repository:branch-compare"
+            },
+            {
+              "type": "separator"
+            },
+            {
+              "label": "Copy URL",
+              "command": "open-repository:copy-url"
             }
           ]
         }

@@ -983,14 +983,14 @@ describe("RepositoryFile", function () {
     });
   });
 
-  it("activates when a command is triggered on the active editor", async () => {
+  it("activates when a command is triggered", async () => {
     const activationPromise = atom.packages.activatePackage("open-repository");
 
     await atom.workspace.open();
-    atom.commands.dispatch(
-      atom.views.getView(atom.workspace.getActivePane()),
-      "open-repository:file",
-    );
+    // The workspace, not the pane: the commands are registered there so the
+    // application menu can reach them, and activationCommands names the same
+    // selector.
+    atom.commands.dispatch(atom.workspace.getElement(), "open-repository:file");
     await activationPromise;
   });
 });

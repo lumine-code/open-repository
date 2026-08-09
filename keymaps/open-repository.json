@@ -3,7 +3,7 @@
   // (alt-g h), git-diff and git-command. These act on the active file rather
   // than on a panel, so they stay at workspace scope: get-active-path falls
   // through the tree view, the active tab and the active editor in turn.
-  "atom-workspace": {
+  "lumine-workspace": {
     "alt-g o": "open-repository:file",
     "alt-g b": "open-repository:blame",
     "alt-g l": "open-repository:history",

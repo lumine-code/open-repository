@@ -37,7 +37,7 @@
     "format:check": "prettier --check ."
   },
   "activationCommands": {
-    "atom-workspace": [
+    "lumine-workspace": [
       "open-repository:blame",
       "open-repository:branch-compare",
       "open-repository:copy-url",

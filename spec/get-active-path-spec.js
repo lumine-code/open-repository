@@ -18,10 +18,10 @@ const img1 = path.resolve(__dirname, "./fixtures/project/img1.png");
 xdescribe("getActivePath", function () {
   let workspaceElement;
   beforeEach(async function () {
-    workspaceElement = atom.views.getView(atom.workspace);
-    await atom.packages.activatePackage("tabs");
-    await atom.packages.activatePackage("tree-view");
-    atom.project.setPaths([projectPath]);
+    workspaceElement = lumine.views.getView(lumine.workspace);
+    await lumine.packages.activatePackage("tabs");
+    await lumine.packages.activatePackage("tree-view");
+    lumine.project.setPaths([projectPath]);
   });
 
   it("returns project path when no target", function () {
@@ -35,18 +35,18 @@ xdescribe("getActivePath", function () {
   });
 
   it("returns active file path when workspace is selected", async function () {
-    await atom.workspace.open(file1);
-    await atom.workspace.open(file2);
+    await lumine.workspace.open(file1);
+    await lumine.workspace.open(file2);
 
     const itemPath = getActivePath(workspaceElement);
     expect(itemPath).toBe(file2);
   });
 
   it("returns file path when tree view is selected", async function () {
-    await atom.workspace.open(file1);
-    await atom.workspace.open(file2);
+    await lumine.workspace.open(file1);
+    await lumine.workspace.open(file2);
 
-    const { treeView } = atom.packages.getLoadedPackage("tree-view").mainModule;
+    const { treeView } = lumine.packages.getLoadedPackage("tree-view").mainModule;
     const file1Target = treeView.selectEntryForPath(file1);
 
     const itemPath = getActivePath(file1Target);
@@ -54,8 +54,8 @@ xdescribe("getActivePath", function () {
   });
 
   it("returns file path when tab is selected", async function () {
-    await atom.workspace.open(file1);
-    await atom.workspace.open(file2);
+    await lumine.workspace.open(file1);
+    await lumine.workspace.open(file2);
     const file1Target = workspaceElement.querySelector(".tab-bar [data-name='file1.txt']");
 
     const itemPath = getActivePath(file1Target);
@@ -63,18 +63,18 @@ xdescribe("getActivePath", function () {
   });
 
   it("returns project when active pane is not a file", async function () {
-    await atom.packages.activatePackage("settings-view");
-    await atom.workspace.open(file1);
-    await atom.workspace.open("lumine://config");
+    await lumine.packages.activatePackage("settings-view");
+    await lumine.workspace.open(file1);
+    await lumine.workspace.open("lumine://config");
 
     const itemPath = getActivePath(workspaceElement);
     expect(itemPath).toBe(projectPath);
   });
 
   it("returns active pane path when it is not a text file", async function () {
-    await atom.packages.activatePackage("image-view");
-    await atom.workspace.open(file1);
-    await atom.workspace.open(img1);
+    await lumine.packages.activatePackage("image-view");
+    await lumine.workspace.open(file1);
+    await lumine.workspace.open(img1);
 
     const itemPath = getActivePath(workspaceElement);
     expect(itemPath).toBe(img1);

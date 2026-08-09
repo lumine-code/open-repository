@@ -28,8 +28,8 @@ describe("RepositoryFile", function () {
     }
 
     async function setupRepositoryFile(filePath = "some-dir/some-file.md") {
-      atom.project.setPaths([workingDirPath]);
-      editor = await atom.workspace.open(filePath);
+      lumine.project.setPaths([workingDirPath]);
+      editor = await lumine.workspace.open(filePath);
       repositoryFile = await RepositoryFile.fromPath(editor.getPath());
       return repositoryFile;
     }
@@ -53,7 +53,7 @@ describe("RepositoryFile", function () {
 
         describe("when text is selected", () => {
           it("opens the GitHub.com blob URL for the file with the selection range in the hash", () => {
-            atom.config.set("open-repository.includeLineNumbersInUrls", true);
+            lumine.config.set("open-repository.includeLineNumbersInUrls", true);
             spyOn(repositoryFile, "openURLInBrowser");
             repositoryFile.open([
               [0, 0],
@@ -67,7 +67,7 @@ describe("RepositoryFile", function () {
 
         describe("when the file has a '#' in its name", () => {
           it("opens the GitHub.com blob URL for the file", async () => {
-            editor = await atom.workspace.open("a/b#/test#hash.md");
+            editor = await lumine.workspace.open("a/b#/test#hash.md");
             repositoryFile = await RepositoryFile.fromPath(editor.getPath());
             spyOn(repositoryFile, "openURLInBrowser");
             repositoryFile.open();
@@ -189,9 +189,9 @@ describe("RepositoryFile", function () {
         });
 
         it("shows a warning", () => {
-          spyOn(atom.notifications, "addWarning");
+          spyOn(lumine.notifications, "addWarning");
           repositoryFile.open();
-          expect(atom.notifications.addWarning).toHaveBeenCalledWith(
+          expect(lumine.notifications.addWarning).toHaveBeenCalledWith(
             "No URL defined for remote: null",
           );
         });
@@ -204,10 +204,10 @@ describe("RepositoryFile", function () {
         });
 
         it("does nothing", () => {
-          spyOn(atom.notifications, "addWarning");
+          spyOn(lumine.notifications, "addWarning");
           repositoryFile.open();
-          expect(atom.notifications.addWarning).toHaveBeenCalled();
-          expect(atom.notifications.addWarning.mostRecentCall.args[0]).toContain(
+          expect(lumine.notifications.addWarning).toHaveBeenCalled();
+          expect(lumine.notifications.addWarning.mostRecentCall.args[0]).toContain(
             "No repository found",
           );
         });
@@ -320,7 +320,7 @@ describe("RepositoryFile", function () {
 
         describe("when text is selected", () => {
           it("opens the GitHub.com blame URL for the file with the selection range in the hash", () => {
-            atom.config.set("open-repository.includeLineNumbersInUrls", true);
+            lumine.config.set("open-repository.includeLineNumbersInUrls", true);
             spyOn(repositoryFile, "openURLInBrowser");
             repositoryFile.blame([
               [0, 0],
@@ -360,9 +360,9 @@ describe("RepositoryFile", function () {
 
         it("shows a warning and does not attempt to open a URL", () => {
           spyOn(repositoryFile, "openURLInBrowser");
-          spyOn(atom.notifications, "addWarning");
+          spyOn(lumine.notifications, "addWarning");
           repositoryFile.blame();
-          expect(atom.notifications.addWarning).toHaveBeenCalledWith(
+          expect(lumine.notifications.addWarning).toHaveBeenCalledWith(
             "Blames do not exist for wikis",
           );
           expect(repositoryFile.openURLInBrowser).not.toHaveBeenCalled();
@@ -379,9 +379,9 @@ describe("RepositoryFile", function () {
 
         it("shows a warning and does not attempt to open a URL", () => {
           spyOn(repositoryFile, "openURLInBrowser");
-          spyOn(atom.notifications, "addWarning");
+          spyOn(lumine.notifications, "addWarning");
           repositoryFile.blame();
-          expect(atom.notifications.addWarning).toHaveBeenCalledWith(
+          expect(lumine.notifications.addWarning).toHaveBeenCalledWith(
             "Blames do not exist for gists",
           );
           expect(repositoryFile.openURLInBrowser).not.toHaveBeenCalled();
@@ -417,9 +417,9 @@ describe("RepositoryFile", function () {
 
         it("shows a warning and does not attempt to open a URL", () => {
           spyOn(repositoryFile, "openURLInBrowser");
-          spyOn(atom.notifications, "addWarning");
+          spyOn(lumine.notifications, "addWarning");
           repositoryFile.openBranchCompare();
-          expect(atom.notifications.addWarning).toHaveBeenCalledWith(
+          expect(lumine.notifications.addWarning).toHaveBeenCalledWith(
             "Branches do not exist for wikis",
           );
           expect(repositoryFile.openURLInBrowser).not.toHaveBeenCalled();
@@ -436,9 +436,9 @@ describe("RepositoryFile", function () {
 
         it("shows a warning and does not attempt to open a URL", () => {
           spyOn(repositoryFile, "openURLInBrowser");
-          spyOn(atom.notifications, "addWarning");
+          spyOn(lumine.notifications, "addWarning");
           repositoryFile.openBranchCompare();
-          expect(atom.notifications.addWarning).toHaveBeenCalledWith(
+          expect(lumine.notifications.addWarning).toHaveBeenCalledWith(
             "Branches do not exist for gists",
           );
           expect(repositoryFile.openURLInBrowser).not.toHaveBeenCalled();
@@ -522,7 +522,7 @@ describe("RepositoryFile", function () {
 
         beforeEach(async () => {
           setupWorkingDir(fixtureName);
-          atom.config.set("open-repository.includeLineNumbersInUrls", true);
+          lumine.config.set("open-repository.includeLineNumbersInUrls", true);
           await setupRepositoryFile();
         });
 
@@ -532,7 +532,7 @@ describe("RepositoryFile", function () {
               [0, 0],
               [1, 1],
             ]);
-            expect(atom.clipboard.read()).toBe(
+            expect(lumine.clipboard.read()).toBe(
               "https://github.com/some-user/some-repo/blob/80b7897ceb6bd7531708509b50afeab36a4b73fd/some-dir/some-file.md#L1-L2",
             );
           });
@@ -544,7 +544,7 @@ describe("RepositoryFile", function () {
               [2, 1],
               [2, 1],
             ]);
-            expect(atom.clipboard.read()).toBe(
+            expect(lumine.clipboard.read()).toBe(
               "https://github.com/some-user/some-repo/blob/80b7897ceb6bd7531708509b50afeab36a4b73fd/some-dir/some-file.md#L3",
             );
           });
@@ -556,7 +556,7 @@ describe("RepositoryFile", function () {
 
         beforeEach(async () => {
           setupWorkingDir(fixtureName);
-          atom.config.set("open-repository.includeLineNumbersInUrls", true);
+          lumine.config.set("open-repository.includeLineNumbersInUrls", true);
           await setupRepositoryFile();
         });
 
@@ -565,7 +565,7 @@ describe("RepositoryFile", function () {
             [0, 0],
             [1, 1],
           ]);
-          expect(atom.clipboard.read()).toBe(
+          expect(lumine.clipboard.read()).toBe(
             "https://github.com/some-user/some-repo/wiki/some-file/80b7897ceb6bd7531708509b50afeab36a4b73fd",
           );
         });
@@ -576,7 +576,7 @@ describe("RepositoryFile", function () {
 
         beforeEach(async () => {
           setupWorkingDir(fixtureName);
-          atom.config.set("open-repository.includeLineNumbersInUrls", true);
+          lumine.config.set("open-repository.includeLineNumbersInUrls", true);
           await setupRepositoryFile("some-file.md");
         });
 
@@ -586,7 +586,7 @@ describe("RepositoryFile", function () {
               [0, 0],
               [1, 1],
             ]);
-            expect(atom.clipboard.read()).toBe(
+            expect(lumine.clipboard.read()).toBe(
               "https://gist.github.com/s0m3ha5h/80b7897ceb6bd7531708509b50afeab36a4b73fd#file-some-file-md-L1-L2",
             );
           });
@@ -598,7 +598,7 @@ describe("RepositoryFile", function () {
               [2, 1],
               [2, 1],
             ]);
-            expect(atom.clipboard.read()).toBe(
+            expect(lumine.clipboard.read()).toBe(
               "https://gist.github.com/s0m3ha5h/80b7897ceb6bd7531708509b50afeab36a4b73fd#file-some-file-md-L3",
             );
           });
@@ -687,9 +687,9 @@ describe("RepositoryFile", function () {
 
         it("shows a warning and does not attempt to open a URL", () => {
           spyOn(repositoryFile, "openURLInBrowser");
-          spyOn(atom.notifications, "addWarning");
+          spyOn(lumine.notifications, "addWarning");
           repositoryFile.openIssues();
-          expect(atom.notifications.addWarning).toHaveBeenCalledWith(
+          expect(lumine.notifications.addWarning).toHaveBeenCalledWith(
             "Issues do not exist for wikis",
           );
           expect(repositoryFile.openURLInBrowser).not.toHaveBeenCalled();
@@ -706,9 +706,9 @@ describe("RepositoryFile", function () {
 
         it("shows a warning and does not attempt to open a URL", () => {
           spyOn(repositoryFile, "openURLInBrowser");
-          spyOn(atom.notifications, "addWarning");
+          spyOn(lumine.notifications, "addWarning");
           repositoryFile.openIssues();
-          expect(atom.notifications.addWarning).toHaveBeenCalledWith(
+          expect(lumine.notifications.addWarning).toHaveBeenCalledWith(
             "Issues do not exist for gists",
           );
           expect(repositoryFile.openURLInBrowser).not.toHaveBeenCalled();
@@ -744,9 +744,9 @@ describe("RepositoryFile", function () {
 
         it("shows a warning and does not attempt to open a URL", () => {
           spyOn(repositoryFile, "openURLInBrowser");
-          spyOn(atom.notifications, "addWarning");
+          spyOn(lumine.notifications, "addWarning");
           repositoryFile.openPullRequests();
-          expect(atom.notifications.addWarning).toHaveBeenCalledWith(
+          expect(lumine.notifications.addWarning).toHaveBeenCalledWith(
             "Pull requests do not exist for wikis",
           );
           expect(repositoryFile.openURLInBrowser).not.toHaveBeenCalled();
@@ -763,9 +763,9 @@ describe("RepositoryFile", function () {
 
         it("shows a warning and does not attempt to open a URL", () => {
           spyOn(repositoryFile, "openURLInBrowser");
-          spyOn(atom.notifications, "addWarning");
+          spyOn(lumine.notifications, "addWarning");
           repositoryFile.openPullRequests();
-          expect(atom.notifications.addWarning).toHaveBeenCalledWith(
+          expect(lumine.notifications.addWarning).toHaveBeenCalledWith(
             "Pull requests do not exist for gists",
           );
           expect(repositoryFile.openURLInBrowser).not.toHaveBeenCalled();
@@ -923,7 +923,7 @@ describe("RepositoryFile", function () {
 
         beforeEach(() => {
           file = repoFileFor(providerKey);
-          atom.config.set("open-repository.includeLineNumbersInUrls", true);
+          lumine.config.set("open-repository.includeLineNumbersInUrls", true);
         });
 
         it("builds the blob, blame and history URLs", () => {
@@ -973,24 +973,24 @@ describe("RepositoryFile", function () {
     });
 
     it("lets an explicit git config override the detected provider", () => {
-      const file = repoFileWithConfig({ "atom.open-repository.provider": "gitlab" });
+      const file = repoFileWithConfig({ "lumine.open-repository.provider": "gitlab" });
       expect(file.detectProvider("https://git.enterprize.me/foo/bar")).toBe("gitlab");
     });
 
     it("ignores an unknown git config override", () => {
-      const file = repoFileWithConfig({ "atom.open-repository.provider": "nope" });
+      const file = repoFileWithConfig({ "lumine.open-repository.provider": "nope" });
       expect(file.detectProvider("https://bitbucket.org/foo/bar")).toBe("bitbucket");
     });
   });
 
   it("activates when a command is triggered", async () => {
-    const activationPromise = atom.packages.activatePackage("open-repository");
+    const activationPromise = lumine.packages.activatePackage("open-repository");
 
-    await atom.workspace.open();
+    await lumine.workspace.open();
     // The workspace, not the pane: the commands are registered there so the
     // application menu can reach them, and activationCommands names the same
     // selector.
-    atom.commands.dispatch(atom.workspace.getElement(), "open-repository:file");
+    lumine.commands.dispatch(lumine.workspace.getElement(), "open-repository:file");
     await activationPromise;
   });
 });

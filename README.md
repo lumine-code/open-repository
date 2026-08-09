@@ -17,7 +17,7 @@ To install `open-repository` search for _open-repository_ in the Install pane of
 
 ## Commands
 
-Commands available in `atom-workspace`:
+Commands available in `lumine-workspace`:
 
 - `open-repository:file`: open the current file on its host,
 - `open-repository:file-on-master`: open the current file on the `master` branch,
@@ -34,9 +34,9 @@ Commands available in `atom-workspace`:
 The repository URL is guessed from the current branch and Git remote information. The host is detected from the remote's domain; unknown or self-hosted domains default to GitHub-style URLs. Use `git config` to override the remote, branch, or host when the defaults are wrong:
 
 ```
-git config atom.open-repository.remote upstream
-git config atom.open-repository.branch some-branch
-git config atom.open-repository.provider gitlab
+git config lumine.open-repository.remote upstream
+git config lumine.open-repository.branch some-branch
+git config lumine.open-repository.provider gitlab
 ```
 
 `provider` accepts `github`, `gitlab`, or `bitbucket`, which is handy for self-hosted instances whose domain does not reveal the host.

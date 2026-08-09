@@ -14,6 +14,6 @@
 [remote "some-remote"]
 	url = https://github.com/foo/bar.git
 	fetch = +refs/heads/*:refs/remotes/origin/*
-[atom "open-repository"]
+[lumine "open-repository"]
 	remote = some-remote
 	branch = some-branch

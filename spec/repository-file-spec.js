@@ -3,7 +3,6 @@ const path = require("path");
 const temp = require("@lumine-code/temp").track();
 const RepositoryFile = require("../lib/repository-file");
 
-const { it, fit, ffit, beforeEach, afterEach } = require("./async-spec-helpers"); // eslint-disable-line no-unused-vars
 
 describe("RepositoryFile", function () {
   let repositoryFile;
@@ -207,7 +206,7 @@ describe("RepositoryFile", function () {
           spyOn(lumine.notifications, "addWarning");
           repositoryFile.open();
           expect(lumine.notifications.addWarning).toHaveBeenCalled();
-          expect(lumine.notifications.addWarning.mostRecentCall.args[0]).toContain(
+          expect(lumine.notifications.addWarning.calls.mostRecent().args[0]).toContain(
             "No repository found",
           );
         });

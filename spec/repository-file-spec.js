@@ -3,7 +3,6 @@ const path = require("path");
 const temp = require("@lumine-code/temp").track();
 const RepositoryFile = require("../lib/repository-file");
 
-
 describe("RepositoryFile", function () {
   let repositoryFile;
   let editor;

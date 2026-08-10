@@ -1,7 +1,6 @@
 const path = require("path");
 const getActivePath = require("../lib/get-active-path");
 
-
 const projectPath = path.resolve(__dirname, "./fixtures/project/");
 const file1 = path.resolve(__dirname, "./fixtures/project/file1.txt");
 const file2 = path.resolve(__dirname, "./fixtures/project/file2.txt");

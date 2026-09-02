@@ -367,7 +367,7 @@ describe("RepositoryFile", function () {
         });
       });
 
-      describe("when the file is part of a GitHub wiki", () => {
+      describe("when the file is part of a GitHub gist", () => {
         let fixtureName = "github-remote-gist";
 
         beforeEach(async () => {
@@ -424,7 +424,7 @@ describe("RepositoryFile", function () {
         });
       });
 
-      describe("when the file is part of a GitHub wiki", () => {
+      describe("when the file is part of a GitHub gist", () => {
         let fixtureName = "github-remote-gist";
 
         beforeEach(async () => {
@@ -694,7 +694,7 @@ describe("RepositoryFile", function () {
         });
       });
 
-      describe("when the file is part of a GitHub wiki", () => {
+      describe("when the file is part of a GitHub gist", () => {
         let fixtureName = "github-remote-gist";
 
         beforeEach(async () => {
@@ -751,7 +751,7 @@ describe("RepositoryFile", function () {
         });
       });
 
-      describe("when the file is part of a GitHub wiki", () => {
+      describe("when the file is part of a GitHub gist", () => {
         let fixtureName = "github-remote-gist";
 
         beforeEach(async () => {

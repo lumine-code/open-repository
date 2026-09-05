@@ -5,11 +5,10 @@
   // through the tree view, the active tab and the active editor in turn.
   "lumine-workspace": {
     "alt-g o": "open-repository:file",
-    "alt-g b": "open-repository:blame",
     "alt-g l": "open-repository:history",
     "alt-g i": "open-repository:issues",
     "alt-g p": "open-repository:pull-requests",
-    "alt-g c": "open-repository:copy-url",
+    "alt-g u": "open-repository:copy-url",
     "alt-g m": "open-repository:branch-compare",
     "alt-g r": "open-repository:repository"
   }

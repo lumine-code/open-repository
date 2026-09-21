@@ -36,19 +36,6 @@
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
-  "activationCommands": {
-    "lumine-workspace": [
-      "open-repository:blame",
-      "open-repository:branch-compare",
-      "open-repository:copy-url",
-      "open-repository:file",
-      "open-repository:file-on-master",
-      "open-repository:history",
-      "open-repository:issues",
-      "open-repository:pull-requests",
-      "open-repository:repository"
-    ]
-  },
   "configSchema": {
     "includeLineNumbersInUrls": {
       "title": "Include Line Numbers In URLs",

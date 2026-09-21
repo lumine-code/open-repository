@@ -986,8 +986,8 @@ describe("RepositoryFile", function () {
 
     await lumine.workspace.open();
     // The workspace, not the pane: the commands are registered there so the
-    // application menu can reach them, and activationCommands names the same
-    // selector.
+    // application menu can reach them; the package registers them eagerly in
+    // JavaScript.
     lumine.commands.dispatch(lumine.workspace.getElement(), "open-repository:file");
     await activationPromise;
   });

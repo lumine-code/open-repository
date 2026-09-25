@@ -26,10 +26,6 @@
   "engines": {
     "lumine": "^1.0.0"
   },
-  "backgroundTips": [
-    "You can open the current file on its Git host's website with {{ 'open-repository:file' | keystroke }}",
-    "You can read the blame of the current file on your Git host with {{ 'open-repository:blame' | keystroke }}"
-  ],
   "scripts": {
     "test": "lumine --test spec",
     "lint": "eslint . --max-warnings 0",
@@ -42,6 +38,13 @@
       "description": "Include the line range selected in the editor when opening or copying URLs to the clipboard. When opened in the browser, the host's page will automatically scroll to the selected line range.",
       "type": "boolean",
       "default": true
+    }
+  },
+  "providedServices": {
+    "background-tips.provider": {
+      "versions": {
+        "1.0.0": "provideBackgroundTips"
+      }
     }
   },
   "devDependencies": {

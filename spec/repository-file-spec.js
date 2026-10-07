@@ -7,6 +7,33 @@ describe("RepositoryFile", function () {
   let repositoryFile;
   let editor;
 
+  it("cancels pending URL reads and suppresses browser actions after deactivation", async () => {
+    const pack = await lumine.packages.activatePackage("open-repository");
+    await lumine.workspace.open(__filename);
+    let finishRefs;
+    const snapshot = new Promise((resolve) => {
+      finishRefs = resolve;
+    });
+    const refs = jasmine.createSpy("ensureRefsSnapshot").and.returnValue(snapshot);
+    spyOn(lumine.repositories, "resolveForPath").and.resolveTo({
+      ensureRefsSnapshot: refs,
+      getConfigValuesAsync: async () => ({}),
+    });
+    const openExternal = spyOn(lumine.shell, "openExternal").and.resolveTo();
+    lumine.commands.dispatch(lumine.workspace.getElement(), "open-repository:repository");
+    await conditionPromise(() => refs.calls.count() > 0);
+    const signal = refs.calls.mostRecent().args[0].signal;
+    await lumine.packages.deactivatePackage("open-repository");
+    expect(signal.aborted).toBe(true);
+    finishRefs({
+      head: { name: "master", oid: "123" },
+      remotes: [{ name: "origin", fetchUrl: "https://github.com/team/repo" }],
+    });
+    await flushMicrotasks();
+    expect(pack.mainModule.pendingRequests.size).toBe(0);
+    expect(openExternal).not.toHaveBeenCalled();
+  });
+
   describe("commands", () => {
     let workingDirPath;
 
@@ -821,6 +848,16 @@ describe("RepositoryFile", function () {
     it("returns the GitHub.com URL for a ssh:// URL", () => {
       repositoryFile.gitURL = () => "ssh://git@github.com/foo/bar.git";
       expect(repositoryFile.repoWebURL()).toBe("https://github.com/foo/bar");
+    });
+
+    it("normalizes arbitrary SSH users and removes transport ports from browser links", () => {
+      repositoryFile.gitURL = () => "ssh://alice@gitlab.example:2222/team/subgroup/repo.git/";
+      expect(repositoryFile.repoWebURL()).toBe("https://gitlab.example/team/subgroup/repo");
+    });
+
+    it("removes HTTP credentials while preserving the forge's port", () => {
+      repositoryFile.gitURL = () => "https://alice:secret@gitlab.example:8443/team/repo.git/";
+      expect(repositoryFile.repoWebURL()).toBe("https://gitlab.example:8443/team/repo");
     });
 
     it("returns the Bitbucket URL for Bitbucket remotes", () => {

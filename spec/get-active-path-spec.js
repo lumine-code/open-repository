@@ -33,6 +33,12 @@ describe("getActivePath", function () {
     expect(itemPath).toBe(file2);
   });
 
+  it("returns the target editor's path while another file is active", async () => {
+    const first = await lumine.workspace.open(file1);
+    await lumine.workspace.open(file2);
+    expect(getActivePath(lumine.views.getView(first))).toBe(file1);
+  });
+
   // Driven against the shape `getActivePath` actually reads rather than a live
   // tree view: the rows are virtualized, so a real one renders no entry at all
   // unless it is in the document with a height, and none of that is this

@@ -69,13 +69,16 @@ describe("RepositoryFile config loading", () => {
     await file.load();
 
     expect(getConfigValuesAsync).toHaveBeenCalledTimes(1);
-    expect(getConfigValuesAsync).toHaveBeenCalledWith([
-      "lumine.open-repository.provider",
-      "lumine.open-repository.remote",
-      "lumine.open-repository.branch",
-      "branch.main.remote",
-      "branch.main.merge",
-    ]);
+    expect(getConfigValuesAsync).toHaveBeenCalledWith(
+      [
+        "lumine.open-repository.provider",
+        "lumine.open-repository.remote",
+        "lumine.open-repository.branch",
+        "branch.main.remote",
+        "branch.main.merge",
+      ],
+      { signal: undefined },
+    );
     expect(file.gitURL()).toBe("https://github.com/owner/repo.git");
   });
 });

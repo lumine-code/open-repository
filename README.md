@@ -2,6 +2,8 @@
 
 View the active file and its repository on its Git host's website.
 
+Fork of [pulsar-edit/pulsar](https://github.com/pulsar-edit/pulsar) (`packages/open-on-github`).
+
 ## Features
 
 - **Multi-host**: builds URLs for GitHub, GitLab, and Bitbucket, and falls back to GitHub-style URLs for other hosts.

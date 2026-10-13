@@ -1,6 +1,15 @@
 {
   "menu": [
     {
+      "label": "File",
+      "submenu": [
+        {
+          "label": "Open Repository on Web",
+          "command": "open-repository:repository"
+        }
+      ]
+    },
+    {
       "label": "Packages",
       "submenu": [
         {

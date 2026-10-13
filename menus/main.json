@@ -5,7 +5,9 @@
       "submenu": [
         {
           "label": "Open Repository on Web",
-          "command": "open-repository:repository"
+          "command": "open-repository:repository",
+          "group": "external",
+          "order": 30
         }
       ]
     },

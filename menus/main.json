@@ -1,13 +1,13 @@
 {
   "menu": [
     {
-      "label": "File",
+      "label": "Git",
       "submenu": [
         {
           "label": "Open Repository on Web",
           "command": "open-repository:repository",
-          "group": "external",
-          "order": 30
+          "group": "repository",
+          "order": 50
         }
       ]
     },
@@ -18,45 +18,45 @@
           "label": "Open Repository",
           "submenu": [
             {
-              "label": "Repository",
+              "label": "Open Repository Page",
               "command": "open-repository:repository"
             },
             {
-              "label": "Issues",
+              "label": "Open Issues",
               "command": "open-repository:issues"
             },
             {
-              "label": "Pull Requests",
+              "label": "Open Pull Requests",
               "command": "open-repository:pull-requests"
             },
             {
               "type": "separator"
             },
             {
-              "label": "File",
+              "label": "Open File on Web",
               "command": "open-repository:file"
             },
             {
-              "label": "File on Master",
+              "label": "Open File on Master",
               "command": "open-repository:file-on-master"
             },
             {
-              "label": "Blame",
+              "label": "Open File Blame",
               "command": "open-repository:blame"
             },
             {
-              "label": "History",
+              "label": "Open File History",
               "command": "open-repository:history"
             },
             {
-              "label": "Branch Compare",
+              "label": "Compare Branch with Default",
               "command": "open-repository:branch-compare"
             },
             {
               "type": "separator"
             },
             {
-              "label": "Copy URL",
+              "label": "Copy File URL",
               "command": "open-repository:copy-url"
             }
           ]

@@ -8,6 +8,7 @@ describe("RepositoryFile", function () {
   let editor;
 
   it("cancels pending URL reads and suppresses browser actions after deactivation", async () => {
+    jasmine.attachToDOM(lumine.workspace.getElement());
     const pack = await lumine.packages.activatePackage("open-repository");
     await lumine.workspace.open(__filename);
     let finishRefs;
@@ -15,10 +16,13 @@ describe("RepositoryFile", function () {
       finishRefs = resolve;
     });
     const refs = jasmine.createSpy("ensureRefsSnapshot").and.returnValue(snapshot);
-    spyOn(lumine.repositories, "resolveForPath").and.resolveTo({
+    const repository = {
       ensureRefsSnapshot: refs,
       getConfigValuesAsync: async () => ({}),
-    });
+      getWorkingDirectory: () => path.dirname(__filename),
+    };
+    spyOn(lumine.repositories, "getForPath").and.returnValue(repository);
+    spyOn(lumine.repositories, "resolveForPath").and.resolveTo(repository);
     const openExternal = spyOn(lumine.shell, "openExternal").and.resolveTo();
     lumine.commands.dispatch(lumine.workspace.getElement(), "open-repository:repository");
     await conditionPromise(() => refs.calls.count() > 0);
@@ -32,6 +36,7 @@ describe("RepositoryFile", function () {
     await flushMicrotasks();
     expect(pack.mainModule.pendingRequests.size).toBe(0);
     expect(openExternal).not.toHaveBeenCalled();
+    lumine.repositories.getForPath.and.callThrough();
   });
 
   describe("commands", () => {
